@@ -43,8 +43,12 @@ public class UserController {
     public ResponseEntity<String> deleteAllUsers() {
         System.out.println("Delete All Users...");
         userRepository.deleteAll();
+        System.out.print("");
         return new ResponseEntity<>("All users have been deleted!", HttpStatus.OK);
     }
+
+
+
 
     /* TODO
     findByUsername
