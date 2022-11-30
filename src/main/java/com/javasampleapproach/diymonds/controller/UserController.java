@@ -45,7 +45,7 @@ public class UserController {
         userRepository.deleteAll();
         System.out.print("");
         System.out.print("");
-        System.out.print("");
+        System.out.print("Matteo");
         return new ResponseEntity<>("All users have been deleted!", HttpStatus.OK);
     }
 
