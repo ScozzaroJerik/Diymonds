@@ -20,8 +20,9 @@ public class UserController {
 
     @PostMapping(value = "/users/add")
     public User addUser(@RequestBody User user) {
+        System.out.println(user.toString());
         System.out.println("Add new user");
-        User _user = userRepository.save(new User(user.getUsername()));
+        User _user = userRepository.save(new User(user.getUsername(),user.getNome(),user.getCognome(), user.getEmail(), user.getPassword()));
         return _user;
     }
 
