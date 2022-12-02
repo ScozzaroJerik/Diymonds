@@ -1,8 +1,10 @@
 package com.javasampleapproach.diymonds.controller;
 
 
-import com.javasampleapproach.diymonds.model.User;
+import com.javasampleapproach.diymonds.model.*;
+import com.javasampleapproach.diymonds.repo.FornitoreRepository;
 import com.javasampleapproach.diymonds.repo.UserRepository;
+import com.javasampleapproach.diymonds.repo.VenditoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,45 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    VenditoreRepository venditoreRepository;
+
+    @Autowired
+    FornitoreRepository fornitoreRepository;
+
     @PostMapping(value = "/users/add")
     public User addUser(@RequestBody User user) {
         System.out.println(user.toString());
         System.out.println("Add new user");
-        User _user = userRepository.save(new User(user.getUsername(),user.getNome(),user.getCognome(), user.getEmail(), user.getPassword()));
+        User _user = new User();
+        if (user.getIsVenditoreFornitore()==0) {
+            _user = userRepository.save(user);
+            return _user;
+        } else if (user.getIsVenditoreFornitore()==1) {
+            _user = venditoreRepository.save(new Venditore(
+                    user.getId(),
+                    user.getUsername(),
+                    user.getNome(),
+                    user.getCognome(),
+                    user.getEmail(),
+                    user.getPassword(),
+                    user.getIsVenditoreFornitore(),
+                    user.getTelefono(),
+                    new ArrayList<AnnuncioGioiello>()));
+            return _user;
+        } else if (user.getIsVenditoreFornitore()==2) {
+            _user = fornitoreRepository.save(new Fornitore(
+                    user.getId(),
+                    user.getUsername(),
+                    user.getNome(),
+                    user.getCognome(),
+                    user.getEmail(),
+                    user.getPassword(),
+                    user.getIsVenditoreFornitore(),
+                    user.getTelefono(),
+                    new ArrayList<AnnuncioMateriaPrima>()));
+            return _user;
+        }
         return _user;
     }
 
@@ -44,12 +80,8 @@ public class UserController {
     public ResponseEntity<String> deleteAllUsers() {
         System.out.println("Delete All Users...");
         userRepository.deleteAll();
-        System.out.print("Jerik2");
         return new ResponseEntity<>("All users have been deleted!", HttpStatus.OK);
     }
-
-
-
 
     /* TODO
     findByUsername
