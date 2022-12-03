@@ -8,13 +8,17 @@ public class Gioiello {
 
     private String nome;
     private ArrayList<String> materiali;
+    private float peso;
+    private String tipo;
 
     public Gioiello() {
     }
 
-    public Gioiello(String nome, ArrayList<String> materiali) {
+    public Gioiello(String nome, ArrayList<String> materiali,float peso, String tipo) {
         this.nome = nome;
         this.materiali = materiali;
+        this.peso = peso;
+        this.tipo = tipo;
     }
 
     public String getNome() {
@@ -33,6 +37,13 @@ public class Gioiello {
         this.materiali = materiali;
     }
 
+    public float getPeso() {
+        return peso;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

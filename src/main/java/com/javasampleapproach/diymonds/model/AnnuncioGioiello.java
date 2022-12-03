@@ -15,14 +15,14 @@ public class AnnuncioGioiello {
     @Column(name = "descrizione", nullable = false)
     private String descrizione;
     @Column(name = "gioiello", nullable = false)
-    private String gioiello;
+    private Gioiello gioiello;
     @Column(name = "prezzo", nullable = false)
     private int prezzo;
 
     public AnnuncioGioiello() {
     }
 
-    public AnnuncioGioiello(long id, long idVenditore, String descrizione, String gioiello, int prezzo) {
+    public AnnuncioGioiello(long id, long idVenditore, String descrizione, Gioiello gioiello, int prezzo) {
         this.id = id;
         this.idVenditore = idVenditore;
         this.descrizione = descrizione;
@@ -54,11 +54,11 @@ public class AnnuncioGioiello {
         this.descrizione = descrizione;
     }
 
-    public String getGioello() {
+    public Gioiello getGioello() {
         return gioiello;
     }
 
-    public void setGioello(String gioiello) {
+    public void setGioello(Gioiello gioiello) {
         this.gioiello = gioiello;
     }
 
