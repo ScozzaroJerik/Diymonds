@@ -1,9 +1,8 @@
 package com.javasampleapproach.diymonds.controller;
 
-import com.javasampleapproach.diymonds.model.AnnuncioGioiello;
 import com.javasampleapproach.diymonds.model.AnnuncioMateriaPrima;
 import com.javasampleapproach.diymonds.model.Fornitore;
-import com.javasampleapproach.diymonds.model.Venditore;
+import com.javasampleapproach.diymonds.repo.AnnuncioMateriaPrimaRepository;
 import com.javasampleapproach.diymonds.repo.FornitoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +19,8 @@ public class FornitoreController {
 
     @Autowired
     FornitoreRepository fornitoreRepository;
+    @Autowired
+    AnnuncioMateriaPrimaRepository annuncioMateriaPrimaRepository;
 
     @GetMapping("/fornitori")
     public List<Fornitore> getAllVenditori() {
@@ -30,13 +31,13 @@ public class FornitoreController {
     }
 
     @PostMapping("/fornitori/{id}/creaAnnuncioMateriaPrima")
-    public AnnuncioMateriaPrima addMateriaPrima(@PathVariable("id") long id, @RequestBody AnnuncioMateriaPrima annuncioMateriaPrima) {
-        System.out.println("Creazione Annuncio Gioiello");
+    public AnnuncioMateriaPrima addAnnuncioMateriaPrima(@PathVariable("id") long id, @RequestBody AnnuncioMateriaPrima annuncioMateriaPrima) {
+        System.out.println("Creazione Annuncio Materia Prima");
         Optional<Fornitore> f = fornitoreRepository.findById(id);
         Fornitore fornitore = f.get();
         annuncioMateriaPrima.setIdFornitore(id);
         fornitore.getAnnunciMateriaPrima().add(annuncioMateriaPrima);
-        System.out.println(fornitore);
+        annuncioMateriaPrimaRepository.save(annuncioMateriaPrima);
         fornitoreRepository.save(fornitore);
         return annuncioMateriaPrima;
     }

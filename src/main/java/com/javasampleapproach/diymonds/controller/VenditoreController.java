@@ -2,6 +2,7 @@ package com.javasampleapproach.diymonds.controller;
 
 import com.javasampleapproach.diymonds.model.AnnuncioGioiello;
 import com.javasampleapproach.diymonds.model.Venditore;
+import com.javasampleapproach.diymonds.repo.AnnuncioGioielloRepository;
 import com.javasampleapproach.diymonds.repo.VenditoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,8 @@ public class VenditoreController {
 
     @Autowired
     VenditoreRepository venditoreRepository;
+    @Autowired
+    AnnuncioGioielloRepository annuncioGioielloRepository;
 
     @GetMapping("/venditori")
     public List<Venditore> getAllVenditori() {
@@ -34,7 +37,7 @@ public class VenditoreController {
         Venditore venditore = v.get();
         annuncioGioiello.setIdVenditore(id);
         venditore.getAnnunciGioelli().add(annuncioGioiello);
-        System.out.println(venditore);
+        annuncioGioielloRepository.save(annuncioGioiello);
         venditoreRepository.save(venditore);
         return annuncioGioiello;
     }
