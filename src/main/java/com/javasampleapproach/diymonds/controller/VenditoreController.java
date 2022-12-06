@@ -1,5 +1,6 @@
 package com.javasampleapproach.diymonds.controller;
 
+import com.javasampleapproach.diymonds.model.AnnuncioGioiello;
 import com.javasampleapproach.diymonds.model.Venditore;
 import com.javasampleapproach.diymonds.repo.VenditoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -23,6 +25,18 @@ public class VenditoreController {
         List<Venditore> venditori = new ArrayList<>();
         venditoreRepository.findAll().forEach(venditori::add);
         return venditori;
+    }
+
+    @PostMapping("/venditori/{id}/creaAnnuncioGioiello")
+    public AnnuncioGioiello addAnnuncioGioiello(@PathVariable("id") long id, @RequestBody AnnuncioGioiello annuncioGioiello) {
+        System.out.println("Creazione Annuncio Gioiello");
+        Optional<Venditore> v = venditoreRepository.findById(id);
+        Venditore venditore = v.get();
+        annuncioGioiello.setIdVenditore(id);
+        venditore.getAnnunciGioelli().add(annuncioGioiello);
+        System.out.println(venditore);
+        venditoreRepository.save(venditore);
+        return null;
     }
 
     @DeleteMapping("/venditori/{id}")

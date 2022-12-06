@@ -22,8 +22,8 @@ public class AnnuncioMateriaPrimaController {
     @GetMapping("/annunciMateriaPrima")
     public List<AnnuncioMateriaPrima> getAllAnnunciMateriaPrima() {
         System.out.println("Get all AnnunciMateriaPrima");
-        List<AnnuncioMateriaPrima> annunciiMateriaPrima = new ArrayList<>();
-        annuncioMateriaPrimaRepository.findAll().forEach(annunciiMateriaPrima::add);
-        return annunciiMateriaPrima;
+        List<AnnuncioMateriaPrima> annunciMateriaPrima = new ArrayList<>();
+        annuncioMateriaPrimaRepository.findAll().forEach(annunciMateriaPrima::add);
+        return annunciMateriaPrima;
     }
 }

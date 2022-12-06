@@ -1,11 +1,12 @@
 package com.javasampleapproach.diymonds.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "AnnuncioGioiello")
-public class AnnuncioGioiello {
+public class AnnuncioGioiello implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,8 +23,13 @@ public class AnnuncioGioiello {
     public AnnuncioGioiello() {
     }
 
-    public AnnuncioGioiello(long id, long idVenditore, String descrizione, String gioiello, int prezzo) {
-        this.id = id;
+    public AnnuncioGioiello(String descrizione, String gioiello, int prezzo) {
+        this.descrizione = descrizione;
+        this.gioiello = gioiello;
+        this.prezzo = prezzo;
+    }
+
+    public AnnuncioGioiello(long idVenditore, String descrizione, String gioiello, int prezzo) {
         this.idVenditore = idVenditore;
         this.descrizione = descrizione;
         this.gioiello = gioiello;
@@ -54,11 +60,11 @@ public class AnnuncioGioiello {
         this.descrizione = descrizione;
     }
 
-    public String getGioello() {
+    public String getGioiello() {
         return gioiello;
     }
 
-    public void setGioello(String gioiello) {
+    public void setGioiello(String gioiello) {
         this.gioiello = gioiello;
     }
 
@@ -89,7 +95,7 @@ public class AnnuncioGioiello {
                 "id=" + id +
                 ", idVenditore=" + idVenditore +
                 ", descrizione='" + descrizione + '\'' +
-                ", gioello=" + gioiello +
+                ", gioiello=" + gioiello +
                 ", prezzo=" + prezzo +
                 '}';
     }
