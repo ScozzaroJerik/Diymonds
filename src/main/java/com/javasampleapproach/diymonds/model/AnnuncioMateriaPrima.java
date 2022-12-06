@@ -1,12 +1,12 @@
 package com.javasampleapproach.diymonds.model;
 
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "AnnuncioGioiello")
-public class AnnuncioMateriaPrima {
+public class AnnuncioMateriaPrima implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

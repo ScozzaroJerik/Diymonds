@@ -36,7 +36,7 @@ public class VenditoreController {
         venditore.getAnnunciGioelli().add(annuncioGioiello);
         System.out.println(venditore);
         venditoreRepository.save(venditore);
-        return null;
+        return annuncioGioiello;
     }
 
     @DeleteMapping("/venditori/{id}")
